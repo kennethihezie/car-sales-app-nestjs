@@ -15,9 +15,10 @@ import { Report } from './reports/model/report.entity';
     database: 'db.sqlite',
     entities: [User, Report],
     synchronize: true
-  }), UsersModule, ReportsModule],
+  }), 
+  UsersModule, ReportsModule],
   controllers: [AppController],
-  providers: [AppService, UserService],
+  providers: [AppService],
 })
 
 export class AppModule {}
