@@ -1,9 +1,13 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
+import { Serialize } from 'src/interceptors/serialize.interceptors';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
+import { UserInterceptorDto } from './dto/user.dto.interceptor';
 import { UserService } from './users.service';
 
 @Controller('auth')
+//Controller level interceptor
+@Serialize(UserInterceptorDto)
 export class UsersController {
     constructor(private userService: UserService){}
 
@@ -12,6 +16,8 @@ export class UsersController {
        this.userService.create(body)
     }
 
+    //Handler level interceptor
+    //@Serialize(UserInterceptorDto)
     @Get('/:id')
     getUserById(@Param('id') id: string){
         const user = this.userService.getUserById(id)
@@ -36,3 +42,11 @@ export class UsersController {
        return this.userService.updateUser(id, updateUserDto)
     }
 }
+
+//Interceptors
+/*
+Interceptors can be used to intercept outgoing reponses or incoming requests. 
+we can have many interceptor intercept a particular incoming or outgoing request.
+
+Interceptors can be applied to a single handler, all the handlers in controller or globally.
+*/
