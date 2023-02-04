@@ -10,8 +10,6 @@ export class User {
 
     @Column()
     password: string
-
-
     
     // the below decorators.
     // AfterInsert
