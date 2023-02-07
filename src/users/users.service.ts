@@ -26,8 +26,12 @@ export class UserService {
     }
 
     //find a user by email
-    async getAllUsers(email: string): Promise<User[]> {
+    async getAllUserEmail(email: string): Promise<User[]> {
         return await this.repository.find({ where: { email }})
+    }
+
+    async getAllUsers(): Promise<User[]> {
+        return await this.repository.find()
     }
 
     //partial here is a typescript thing. so its basically saying attrs 

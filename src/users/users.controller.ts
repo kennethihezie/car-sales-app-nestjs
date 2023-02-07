@@ -1,5 +1,6 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query, Session } from '@nestjs/common';
 import { Serialize } from 'src/interceptors/serialize.interceptors';
+import { AuthService } from './auth.service';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
 import { UserInterceptorDto } from './dto/user.dto.interceptor';
@@ -9,11 +10,17 @@ import { UserService } from './users.service';
 //Controller level interceptor
 @Serialize(UserInterceptorDto)
 export class UsersController {
-    constructor(private userService: UserService){}
+    constructor(private userService: UserService, private authService: AuthService){}
 
     @Post('/signup')
     createUser(@Body() body: UserDto){
-       this.userService.create(body)
+       return this.authService.signUp(body)
+    //    this.userService.create(body)
+    }
+
+    @Post('/login')
+    loginUser(@Body() body: UserDto){
+        return this.authService.logIn(body)
     }
 
     //Handler level interceptor
@@ -28,8 +35,13 @@ export class UsersController {
     }
 
     @Get()
-    getAllUsers(@Query('email') email: string){
-        return this.userService.getAllUsers(email)
+    getAllUserEmail(@Query('email') email: string){
+        return this.userService.getAllUserEmail(email)
+    }
+
+    @Get()
+    getAllUsers(){
+        return this.userService.getAllUsers()
     }
 
     @Delete('/:id')
@@ -40,6 +52,20 @@ export class UsersController {
     @Patch('/:id')
     updateAUser(@Param('id') id: string,  @Body() updateUserDto: UpdateUserDto){
        return this.userService.updateUser(id, updateUserDto)
+    }
+
+
+    //Learning session.
+    @Get('/colors/:color')
+    setColor(@Param('color') color: string, @Session() session: any){
+        console.log(color);
+        
+      session.color = color
+    }
+
+    @Get('/colors')
+    getColors(@Session() session: any){
+        return session.color;
     }
 }
 
