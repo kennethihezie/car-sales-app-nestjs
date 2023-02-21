@@ -1,14 +1,18 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-const cookieSession = require('cookie-session')
+ 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.use(cookieSession({
-    //A key can be any random string used to encrypt an data.
-    keys: ['Azreal']
-  }))
+  // app.use(cookieSession({
+  //   //A key can be any random string used to encrypt an data.
+  //   keys: ['azreal']
+  // }))
+  // app.use(cookieSession({
+  //   //A key can be any random string used to encrypt an data.
+  //   keys: ['azreal']
+  // }))
   //using global pipes
   app.useGlobalPipes(
     new ValidationPipe({

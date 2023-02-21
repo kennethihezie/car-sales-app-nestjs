@@ -56,18 +56,24 @@ export class UsersController {
 
 
     //Learning session.
-    @Get('/colors/:color')
-    setColor(@Param('color') color: string, @Session() session: any){
-        console.log(color);
-        
-      session.color = color
-    }
+    // @Get('/colors/:color')
+    // setColor(@Param('color') color: string, @Session() session: any){
+    //     session.color = color
+    // }
 
-    @Get('/colors')
-    getColors(@Session() session: any){
-        return session.color;
-    }
+    // @Get('/colors')
+    // getColors(@Session() session: any){
+    //     return session.color
+    // }
 }
+
+/*
+  @Get()
+  getHello(@Session() session: { views?: number }) {
+    session.views = (session.views || 0) + 1;
+    return session.views;
+  }
+*/
 
 //Interceptors
 /*

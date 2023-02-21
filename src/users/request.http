@@ -38,10 +38,10 @@ DELETE  http://localhost:3000/auth/4
 
 
 ### Set a color
-GET   http://localhost:3000/auth/colors/blue
+# GET   http://localhost:3000/auth/colors/blue
 
 ### Get a color
-GET   http://localhost:3000/auth/colors
+# GET   http://localhost:3000/auth/colors
 
 
 

@@ -3,10 +3,13 @@ import { UserService } from "./users.service";
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { UserDto } from "./dto/user.dto";
+
 //randombytes generate random numbers
-//script is the actual hashing library
+//scriypt is the actual hashing library
 //promisfy converts any callback function to promise.
+
 const script = promisify(_scrypt)
+
 
 @Injectable()
 export class AuthService{
