@@ -3,6 +3,7 @@ import { UserService } from "./users.service";
 import { randomBytes, scrypt as _scrypt } from "crypto";
 import { promisify } from "util";
 import { UserDto } from "./dto/user.dto";
+import { User } from "./model/user.entity";
 
 //randombytes generate random numbers
 //scriypt is the actual hashing library
@@ -15,7 +16,7 @@ const script = promisify(_scrypt)
 export class AuthService{
   constructor(private userService: UserService){}
 
-  async signUp({email, password}: UserDto): Promise<UserDto>{
+  async signUp({email, password}: UserDto): Promise<User>{
     //TODO See if email is in use.
     const users = await this.userService.getAllUserEmail(email)
     if(users.length){
@@ -34,7 +35,7 @@ export class AuthService{
     return user
   }
  
-  async logIn({email, password}: UserDto): Promise<UserDto>{
+  async logIn({email, password}: UserDto): Promise<User>{
      const [user] = (await this.userService.getAllUserEmail(email))
      if(!user){
       throw new BadRequestException('User Not Found')

@@ -22,6 +22,9 @@ export class UserService {
 
     //get a user by id
     async getUserById(id: string): Promise<User> {
+        if(!id){
+            return null
+        }
         return await this.repository.findOneBy({ id })
     }
 
