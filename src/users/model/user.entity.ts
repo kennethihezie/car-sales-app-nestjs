@@ -1,4 +1,5 @@
-import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Report } from "src/reports/model/report.entity";
+import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
@@ -10,6 +11,16 @@ export class User {
 
     @Column()
     password: string
+
+    @Column({ default: false })
+    admin: boolean
+
+    //Creating a one to many relationship
+    //it dosen't change the datebase.
+    //Reports tied to this user will be accessed with user.reports
+    //Associtions is not automatically fetched when we fatch a user.
+    @OneToMany(() => Report, (report) => report.user)
+    reports: Report[]
     
     // the below decorators.
     // AfterInsert
