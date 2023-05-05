@@ -6,6 +6,7 @@ import { User } from 'src/users/model/user.entity';
 import { Repository } from 'typeorm';
 import { ApprovedReportDto } from './dto/approve-report-dto';
 import CreateReportDto from './dto/create-report-dto';
+import { GetEstimateDto } from './dto/get-estimate-dto';
 import { ReportDto } from './dto/report.dto';
 import { Report } from './model/report.entity';
 
@@ -39,5 +40,20 @@ export class ReportsService {
        }
 
        return this.repository.save(report)       
+    }
+
+    async createEstimate({ make, model, lng, lat, year, milage }: GetEstimateDto) {
+       return await this.repository.createQueryBuilder()
+       .select('AVG(price)', 'price')
+       .where('make = :make', { make: make })
+       .andWhere('mode = :model', { model: model })
+       .andWhere('lng - :lng BETWEEN -5 AND 5', { lng })
+       .andWhere('lat - :lat BETWEEN -5 AND 5', { lat })
+       .andWhere('year - :year BETWEEN -3 AND 3', { year })
+       .andWhere('approved IS TRUE')
+       .orderBy('ABS(milage - :milage)', 'DESC')
+       .setParameters({ milage })
+       .limit(3)
+       .getRawOne()
     }
 }
