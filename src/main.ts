@@ -1,7 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
- 
+import { AppModule } from './app/app.module'; 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,7 +15,7 @@ async function bootstrap() {
   //using global pipes
   app.useGlobalPipes(
     new ValidationPipe({
-      //to make that incoming requests don't have extrnous request on our body.
+      //to make sure that incoming requests don't have extrnous request on our body.
       whitelist: true
     })
   )

@@ -16,7 +16,7 @@ import { UserService } from './users.service';
 @Serialize(UserInterceptorDto)
 // @UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
-    constructor(private userService: UserService, private authService: AuthService){}
+    constructor(private readonly userService: UserService, private readonly authService: AuthService){}
 
     @UseGuards(AuthGuard)
     @Get('/current/user')
@@ -27,7 +27,6 @@ export class UsersController {
     // getCurrentlySignedInUser(@Session() session: any) {
     //     return this.userService.getUserById(session.userId)
     // }
-
 
 
     @Post('/signout')
@@ -61,9 +60,9 @@ export class UsersController {
         return user
     }
 
-    @Get()
-    getAllUserEmail(@Query('email') email: string){
-        return this.userService.getAllUserEmail(email)
+    @Get('/userByEmail')
+    getAllUserByEmail(@Query('email') email: string){
+        return this.userService.getAllUserByEmail(email)
     }
 
     @Get()
@@ -80,18 +79,6 @@ export class UsersController {
     updateAUser(@Param('id') id: string,  @Body() updateUserDto: UpdateUserDto){
        return this.userService.updateUser(id, updateUserDto)
     }
-
-
-    //Learning session.
-    // @Get('/colors/:color')
-    // setColor(@Param('color') color: string, @Session() session: any){
-    //     session.color = color
-    // }
-
-    // @Get('/colors')
-    // getColors(@Session() session: any){
-    //     return session.color
-    // }
 }
 
 /*

@@ -14,11 +14,11 @@ const script = promisify(_scrypt)
 
 @Injectable()
 export class AuthService{
-  constructor(private userService: UserService){}
+  constructor(private readonly userService: UserService){}
 
   async signUp({email, password}: UserDto): Promise<User>{
     //TODO See if email is in use.
-    const users = await this.userService.getAllUserEmail(email)
+    const users = await this.userService.getAllUserByEmail(email)
     if(users.length){
         throw new BadRequestException('Email in use')
     }
@@ -36,7 +36,7 @@ export class AuthService{
   }
  
   async logIn({email, password}: UserDto): Promise<User>{
-     const [user] = (await this.userService.getAllUserEmail(email))
+     const [user] = (await this.userService.getAllUserByEmail(email))
      if(!user){
       throw new BadRequestException('User Not Found')
      }
