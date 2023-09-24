@@ -5,6 +5,6 @@ export const CurrentUser = createParamDecorator(
     //never means don't pass any argument
     (data: never, context: ExecutionContext) => {
         const request = context.switchToHttp().getRequest()
-        return request.CurrentUser
+        return request.currentUser
     }
 )

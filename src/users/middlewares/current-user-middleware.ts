@@ -1,6 +1,5 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response } from "express";
-import { User } from "../model/user.entity";
 import { UserService } from "../users.service";
 
 // Declare a global namespace telling nestjs that the express class can have addtional parameter.
@@ -11,7 +10,6 @@ import { UserService } from "../users.service";
 //         }
 //     }
 // }
-
 @Injectable()
 export class CurrentUserMiddleware implements NestMiddleware {
     constructor (private userService: UserService) {}

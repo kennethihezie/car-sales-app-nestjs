@@ -1,7 +1,7 @@
 import { Report } from "src/reports/model/report.entity";
 import { AfterInsert, AfterRemove, AfterUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
+@Entity('user')
 export class User {
     @PrimaryGeneratedColumn()
     id: string

@@ -2,16 +2,14 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module'; 
 
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   // app.use(cookieSession({
   //   //A key can be any random string used to encrypt an data.
   //   keys: ['azreal']
   // }))
-  // app.use(cookieSession({
-  //   //A key can be any random string used to encrypt an data.
-  //   keys: ['azreal']
-  // }))
+  
   //using global pipes
   app.useGlobalPipes(
     new ValidationPipe({
@@ -19,6 +17,7 @@ async function bootstrap() {
       whitelist: true
     })
   )
-  await app.listen(3000);
+  await app.listen(process.env.PORT || 3000);
 }
+
 bootstrap();
