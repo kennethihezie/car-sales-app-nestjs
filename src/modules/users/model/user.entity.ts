@@ -19,7 +19,7 @@ export class User {
     //it dosen't change the datebase.
     //Reports tied to this user will be accessed with user.reports
     //Associtions is not automatically fetched when we fatch a user.
-    @OneToMany(() => Report, (report) => report.user)
+    // @OneToMany(() => Report, (report) => report.user)
     reports: Report[]
     
     // the below decorators.
