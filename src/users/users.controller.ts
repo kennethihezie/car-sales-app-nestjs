@@ -23,6 +23,7 @@ export class UsersController {
     getCurrentlySignedInUser(@CurrentUser() user: User) {
         return user
     }
+    
     // @Get('/current/user')
     // getCurrentlySignedInUser(@Session() session: any) {
     //     return this.userService.getUserById(session.userId)

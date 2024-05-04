@@ -14,7 +14,7 @@ import { CookieSessionModule } from 'nestjs-cookie-session';
     TypeOrmModule.forRoot({
     type: 'sqlite',
     database: 'db.sqlite',
-    entities: [User, Report],
+    entities: [ User, Report ],
     synchronize: true
   }), 
   CookieSessionModule.forRoot({ session: { secret: 'qwerty' } }),
