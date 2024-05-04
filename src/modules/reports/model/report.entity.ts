@@ -1,4 +1,4 @@
-import { User } from "src/users/model/user.entity";
+import { User } from "src/modules/users/model/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('report')

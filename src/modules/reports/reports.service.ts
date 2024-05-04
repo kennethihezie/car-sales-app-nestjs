@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Serialize } from 'src/interceptors/serialize.interceptors';
-import { UserInterceptorDto } from 'src/users/dto/user.dto.interceptor';
-import { User } from 'src/users/model/user.entity';
+import { UserInterceptorDto } from 'src/modules/users/dto/user.dto.interceptor';
+import { User } from 'src/modules/users/model/user.entity';
 import { Repository } from 'typeorm';
 import { ApprovedReportDto } from './dto/approve-report-dto';
 import CreateReportDto from './dto/create-report-dto';
