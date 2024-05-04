@@ -6,15 +6,12 @@ import { CurrentUser } from './decorators/current-user.decorator';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
 import { UserInterceptorDto } from './dto/user.dto.interceptor';
-// import { CurrentUserInterceptor } from './interceptors/current-user.interceptor';
 import { User } from './model/user.entity';
 import { UserService } from './users.service';
 
 
 @Controller('auth')
-//Controller level interceptor
 @Serialize(UserInterceptorDto)
-// @UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
     constructor(private readonly userService: UserService, private readonly authService: AuthService){}
 
@@ -23,12 +20,6 @@ export class UsersController {
     getCurrentlySignedInUser(@CurrentUser() user: User) {
         return user
     }
-    
-    // @Get('/current/user')
-    // getCurrentlySignedInUser(@Session() session: any) {
-    //     return this.userService.getUserById(session.userId)
-    // }
-
 
     @Post('/signout')
     signOut(@Session() session: any) {
@@ -40,7 +31,6 @@ export class UsersController {
        const user = await this.authService.signUp(body)
        session.userId = user.id
        return user
-       // this.userService.create(body)
     }
 
     @Post('/login')
@@ -50,8 +40,7 @@ export class UsersController {
         return user
     }
 
-    //Handler level interceptor
-    //@Serialize(UserInterceptorDto)
+
     @Get('/:id')
     getUserById(@Param('id') id: string){
         const user = this.userService.getUserById(id)

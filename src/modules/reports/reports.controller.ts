@@ -15,7 +15,6 @@ export class ReportsController {
     constructor(private readonly reportService: ReportsService) {}
 
     @Post()
-    //Make sure user is signed in.
     @UseGuards(AuthGuard)
     @Serialize(ReportDto)
     createReport(@Body() body: CreateReportDto, @CurrentUser() user: User) {
@@ -33,12 +32,3 @@ export class ReportsController {
        this.reportService.createEstimate(query)
     }
 }
-
-/*
-Order of execution from an incoming request
-
-Middlewares
-Guards
-Interceptors
-
-*/
