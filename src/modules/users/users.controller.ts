@@ -11,11 +11,11 @@ import { UserService } from './users.service';
 
 
 @Controller('auth')
-@Serialize(UserInterceptorDto)
+// @Serialize(UserInterceptorDto)
 export class UsersController {
     constructor(private readonly userService: UserService, private readonly authService: AuthService){}
 
-    @UseGuards(AuthGuard)
+    // @UseGuards(AuthGuard)
     @Get('/current/user')
     getCurrentlySignedInUser(@CurrentUser() user: User) {
         return user
@@ -42,7 +42,7 @@ export class UsersController {
 
 
     @Get('/:id')
-    getUserById(@Param('id') id: string){
+    getUserById(@Param('id') id: string){        
         const user = this.userService.getUserById(id)
         if(!user){
             throw new NotFoundException('user not found')
