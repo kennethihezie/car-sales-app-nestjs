@@ -1,6 +1,7 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './modules/app/app.module'; 
+import * as session from 'express-session';
 
 
 async function bootstrap() {
@@ -10,6 +11,14 @@ async function bootstrap() {
     new ValidationPipe({
       //to make sure that incoming requests don't have extrnous request on our body.
       whitelist: true
+    })
+  )
+
+  app.use(
+    session({
+      secret: 'my-secret',
+      resave: false,
+      saveUninitialized: false
     })
   )
   await app.listen(process.env.PORT || 3000);
